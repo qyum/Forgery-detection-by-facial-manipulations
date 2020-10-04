@@ -6,11 +6,6 @@ import os
 import random
 import subprocess
 
-os.environ["MKL_NUM_THREADS"] = "1"
-os.environ["NUMEXPR_NUM_THREADS"] = "1"
-os.environ["OMP_NUM_THREADS"] = "1"
-
-
 
 def compress_video(data_folder):
 
