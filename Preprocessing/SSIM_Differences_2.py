@@ -10,14 +10,14 @@ for index in range(0,len(names)):
     #if len(names[index]) > best:
     #best = names_1[index]
     root_dir='F:/deepfake_data/train_sample_videos_2/' 
-    best=os.path.join(root_dir,"{}.mp4".format(names[index]))
+    ori_id=os.path.join(root_dir,"{}.mp4".format(names[index]))
     #print(best)
-    capture_ori = cv2.VideoCapture(best)
+    capture_ori = cv2.VideoCapture(ori_id)
     frames_num_ori = int(capture_ori.get(cv2.CAP_PROP_FRAME_COUNT))
     #print(frames_num_ori)
-    best_1=os.path.join(root_dir,"{}.mp4".format(names_1[index]))
+    fake_id=os.path.join(root_dir,"{}.mp4".format(names_1[index]))
     #print(best_1)
-    capture_fake = cv2.VideoCapture(best_1)
+    capture_fake = cv2.VideoCapture(fake_id)
     frames_num_fake = int(capture_fake.get(cv2.CAP_PROP_FRAME_COUNT))
     #print(frames_num_ori)
     for j in range(max(frames_num_ori,frames_num_fake)):
@@ -26,18 +26,23 @@ for index in range(0,len(names)):
             capture_ori.grab()
             if j % 10 != 0:
                 continue
-            success, frame_1 = capture_ori.retrieve()    
+            success, frame_1 = capture_ori.retrieve()
+            
             if not success:
                 continue
-            #id = os.path.splitext(os.path.basename(ori_id))[0]
+            #print(frame_1)
+            id_1 = os.path.splitext(os.path.basename(ori_id))[0]
             
             #........for fake id...........................
             capture_fake.grab()
             if j % 10 != 0:
                 continue
-            success, frame_2 = capture_fake.retrieve()    
+            success, frame_2 = capture_fake.retrieve()
+            
             if not success:
                 continue
+            id_2= os.path.splitext(os.path.basename(fake_id))[0]
+            #print(frame_2)
             
             #........ ...................SSIm differences...................................
             #try:
@@ -48,6 +53,7 @@ for index in range(0,len(names)):
             diff = (a * 255).astype(np.uint8)
             diff = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
             diff_path='F:/deepfake_data/ssim_diff.jpg'
-            cv2.imwrite(diff_path, diff)   
+            #cv2.imwrite(diff_path, diff)
+            cv2.imwrite(os.path.join(diff_path,"{}_{}_{}.jpg".format(id_1,id_2, j)),diff)
             #except:
                    #pass
