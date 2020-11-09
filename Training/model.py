@@ -1,4 +1,7 @@
 
+!pip install -q efficientnet
+import efficientnet.tfkeras as efn
+
 LABEL_SMOOTHING = 0.05
 def build_model_1(IMAGE_WIDTH,IMAGE_HEIGHT,IMAGE_CHANNELS):
     model = tf.keras.Sequential([
