@@ -19,3 +19,6 @@ def build_model_1(IMAGE_WIDTH,IMAGE_HEIGHT,IMAGE_CHANNELS):
     return model 
 model_1=build_model_1(IMAGE_WIDTH, IMAGE_HEIGHT,IMAGE_CHANNELS)
 model_1.summary()
+
+from keras.utils import plot_model
+plot_model(model_1, to_file='model.png')
