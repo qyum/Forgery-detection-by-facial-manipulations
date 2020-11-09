@@ -53,6 +53,7 @@ example_generator = train_datagen.flow_from_dataframe(
     class_mode='categorical'
     #class_mode='binary'
 )
+#saw the random image
 
 import matplotlib.pyplot as plt
 plt.figure(figsize=(12, 12))
@@ -65,6 +66,7 @@ for i in range(0, 15):
 plt.tight_layout()
 plt.show()
 
+
 WARMUP = 5
 epochs=15
 LR = 0.00004
@@ -72,6 +74,7 @@ import re
 import cv2
 import math
 import time
+from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 
 def get_cosine_schedule_with_warmup(lr,num_warmup_steps, num_training_steps, num_cycles=0.5):
